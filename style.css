@@ -18,6 +18,9 @@ header{
      background: lightblue;
      text-align: right;
      font-size:xx-large;
+     overflow:auto;
+     
+    
 }
 .keys{
     
@@ -46,5 +49,5 @@ header{
 }
 
 .keys :last-child{
-    width:100%;
+    flex-grow: 1;
 }

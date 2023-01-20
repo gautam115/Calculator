@@ -5,7 +5,7 @@ keys.forEach(key=>key.addEventListener('click',onClick));
 let numbers = []
 let operators = []
 let numberIndex = 0;
-
+let prevAnsIndex = sessionStorage.getItem('prevAnsIndex')==null?-1:sessionStorage.getItem('prevAnsIndex');
 
 function onClick(){
 
@@ -21,6 +21,9 @@ function onClick(){
  else if(this.innerText=='='){
     handleEqual();
  }
+ else if(this.innerText=='pAns'){
+    handlePrevAns();
+ }
  else {
        handleNumber(this.innerText);
       
@@ -32,12 +35,12 @@ function onClick(){
 //when an operator key is pressed on the calculator
 function handleOperator(operator){
     
-   if(lastDigitIsOperator())
+   if(lastDigitIsOperator()||display.innerText.length==0)
    return;
 
    operators.push(operator);
     numberIndex++;
-    console.log(numberIndex);
+
   addToDisplay(operator);
   
 }
@@ -84,7 +87,23 @@ function handleEqual(){
    handleCE();
   addToDisplay(ans);
   numbers[numberIndex] = ans;
+  sessionStorage.setItem(prevAnsIndex+1,ans);
+  prevAnsIndex++;
+  sessionStorage.setItem('prevAnsIndex',prevAnsIndex);
   
+}
+
+function handlePrevAns(){
+    if(prevAnsIndex==-1)
+    return;
+
+    handleCE();
+    let prevAns = sessionStorage.getItem(prevAnsIndex);
+    addToDisplay(prevAns);
+    numbers[0]=prevAns;
+    prevAnsIndex--;
+    sessionStorage.setItem('prevAnsIndex',prevAnsIndex);
+
 }
 
 function isOperator(value){
@@ -98,7 +117,7 @@ function isOperator(value){
 
 function lastDigitIsOperator(){
 
-let lastDigit = display.innerText[display.length-1];
+let lastDigit = display.innerText[display.innerText.length-1];
 
 if(isOperator(lastDigit))
 return true;
@@ -125,7 +144,7 @@ function calculate(){
    
 let ans = Number(numbers[0]);
 for(let operatorIndex=0;operatorIndex<operators.length;operatorIndex++){
-    console.log(numbers[operatorIndex+1])
+    
     let nextNumber = Number(numbers[operatorIndex+1]);
 
     switch(operators[operatorIndex]){
