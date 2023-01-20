@@ -1,13 +1,18 @@
+
+header{
+    text-align: center;
+    font-style: italic;
+}
 #calculator{
     width: 20vw;
-    background: ghostwhite;
+    min-width: 270px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin:auto;
 }
 .display{
-    width: 80%;
+    width: 100%;
      height: 40px;
      border: 2px solid black;
      background: lightblue;
@@ -15,20 +20,31 @@
      font-size:xx-large;
 }
 .keys{
+    
     background-color:rgb(191, 186, 186);
-    width: 80%;
+    width: 100%;
     display:flex;
     border: 1px solid black;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.keys div{
+.key{
     padding: 3px;
     background-color: lightgrey;
     margin: 5px;
     font-weight: 500;
     font-size: larger;
-    width: 40px;
+    width: 50px;
     text-align: center;
     box-shadow: 2px 2px;
+    transition: 0.5s;
+}
+
+.key:hover{
+    background-color: rgb(88, 86, 86);
+}
+
+.keys :last-child{
+    width:100%;
 }
