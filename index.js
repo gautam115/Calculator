@@ -45,6 +45,7 @@ function handleOperator(operator){
   
 }
 
+//when the decimal key is pressed
 function handleDecimal(){
     
     if(numbers.length==numberIndex){
@@ -72,6 +73,7 @@ function handleNumber(num){
    addToDisplay(num);
 }
 
+//When the CE key is pressed
 function handleCE(){
     display.textContent='';
     numbers = [];
@@ -79,6 +81,7 @@ function handleCE(){
     numberIndex = 0;
 }
 
+//When the Equal key is pressed
 function handleEqual(){
   if(lastDigitIsOperator())return;
   if(display.innerText.length==0)return;
@@ -93,6 +96,7 @@ function handleEqual(){
   
 }
 
+//when the pAns key is pressed
 function handlePrevAns(){
     if(prevAnsIndex==-1)
     return;
@@ -106,6 +110,7 @@ function handlePrevAns(){
 
 }
 
+//To find if the key pressed is an opreator
 function isOperator(value){
 
     if(value=='+'||value=='-'||value=='*'||value=='/'){
@@ -115,6 +120,7 @@ function isOperator(value){
     return false;
 }
 
+//To find if the last value on the display is an operator
 function lastDigitIsOperator(){
 
 let lastDigit = display.innerText[display.innerText.length-1];
@@ -136,10 +142,12 @@ function currNumHasDecimal(){
 
 }
 
+//To add the key pressed to display
 function addToDisplay(value){
     display.textContent += value;
 }
 
+//To calculate the ans after pressing '=' key
 function calculate(){
    
 let ans = Number(numbers[0]);
